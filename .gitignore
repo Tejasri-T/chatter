@@ -12,5 +12,5 @@ yarn-error.log*
 
 environment variables
 
-.env
-.env.*
+backend/.env
+backend/.env.*
