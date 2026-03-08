@@ -1,7 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import cookieParser from 'cookie-parser';
+// import cookieParser from 'cookie-parser';
 import path from 'path';
+import { connectDB } from './lib/db.js';
 
 
 import authRoutes from './routes/auth.route.js';
@@ -15,7 +16,7 @@ const __dirname = path.resolve();
 
 const PORT = process.env.PORT || 3000;
 
-// app.use(express.json()); // need to add this for parsing JSON bodies too
+app.use(express.json()); // need to add this for parsing JSON bodies too
 // app.use(cookieParser()); // usually needed for auth
 
 app.use("/api/auth", authRoutes);
@@ -31,5 +32,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 app.listen(PORT, () => {
     console.log(`Server is running on port http://localhost:${PORT}`);
+    connectDB();
 });
 

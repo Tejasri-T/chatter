@@ -12,5 +12,9 @@ yarn-error.log*
 
 environment variables
 
-backend/.env
-backend/.env.*
+/backend/.env
+/backend/.env.*
+
+data.txt
+
+
