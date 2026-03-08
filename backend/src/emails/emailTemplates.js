@@ -5,7 +5,7 @@ export function createWelcomeEmailTemplate(name, clientURL) {
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Messenger</title>
+    <title>Welcome to Chatter</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
   </head>
   <body style="margin: 0; padding: 0; background-color: #EEEBE4; font-family: 'Lato', Georgia, serif;">
@@ -25,7 +25,7 @@ export function createWelcomeEmailTemplate(name, clientURL) {
                 </div>
 
                 <h1 style="font-family: 'Playfair Display', Georgia, serif; font-size: 26px; font-weight: 500; color: #F5F0E8; margin: 0 0 8px; letter-spacing: 0.5px;">
-                  Welcome to Messenger
+                  Welcome to Chatter
                 </h1>
                 <p style="font-family: 'Lato', sans-serif; font-size: 12px; color: #D4C4A6; letter-spacing: 3px; text-transform: uppercase; margin: 0; font-weight: 300;">
                   Your space to connect
@@ -50,7 +50,7 @@ export function createWelcomeEmailTemplate(name, clientURL) {
                 </p>
 
                 <p style="font-family: 'Lato', sans-serif; font-size: 15px; color: #5C5346; line-height: 1.8; margin: 0 0 28px; font-weight: 300;">
-                  We're delighted to welcome you to Messenger — a thoughtfully crafted space for meaningful conversations. Whether you're reconnecting with friends, coordinating with colleagues, or staying close to family, we're here to make every exchange feel effortless.
+                  We're delighted to welcome you to Chatter — a thoughtfully crafted space for meaningful conversations. Whether you're reconnecting with friends, coordinating with colleagues, or staying close to family, we're here to make every exchange feel effortless.
                 </p>
 
                 <!-- Steps card -->
@@ -126,7 +126,7 @@ export function createWelcomeEmailTemplate(name, clientURL) {
                   <tr>
                     <td align="center">
                       <a href="${clientURL}" style="display: inline-block; background-color: #1B2D4F; color: #F5F0E8; text-decoration: none; font-family: 'Lato', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; padding: 16px 40px; border-radius: 2px;">
-                        Open Messenger
+                        Open Chatter
                       </a>
                     </td>
                   </tr>
@@ -136,7 +136,7 @@ export function createWelcomeEmailTemplate(name, clientURL) {
                   Should you have any questions, our team is always here to help.
                 </p>
                 <p style="font-family: 'Lato', sans-serif; font-size: 14px; color: #7A7066; line-height: 1.8; margin: 0 0 32px; font-weight: 300;">
-                  We hope Messenger brings you closer to the people that matter most.
+                  We hope Chatter brings you closer to the people that matter most.
                 </p>
 
                 <!-- Signature divider -->
@@ -144,7 +144,7 @@ export function createWelcomeEmailTemplate(name, clientURL) {
 
                 <p style="font-family: 'Lato', sans-serif; font-size: 14px; color: #5C5346; margin: 0; font-weight: 300;">
                   With warmth,<br>
-                  <span style="font-family: 'Playfair Display', Georgia, serif; font-size: 16px; color: #1B2D4F; font-weight: 500;">The Messenger Team</span>
+                  <span style="font-family: 'Playfair Display', Georgia, serif; font-size: 16px; color: #1B2D4F; font-weight: 500;">The Chatter Team</span>
                 </p>
 
               </td>
@@ -154,7 +154,7 @@ export function createWelcomeEmailTemplate(name, clientURL) {
             <tr>
               <td style="background-color: #2C3E5A; padding: 24px 50px; border-radius: 0 0 4px 4px; text-align: center;">
                 <p style="font-family: 'Lato', sans-serif; font-size: 11px; color: #8A9BB5; letter-spacing: 1.5px; text-transform: uppercase; margin: 0 0 12px; font-weight: 300;">
-                  © 2025 Messenger · All Rights Reserved
+                  © 2025 Chatter · All Rights Reserved
                 </p>
                 <p style="margin: 0;">
                   <a href="#" style="font-family: 'Lato', sans-serif; font-size: 11px; color: #D4C4A6; text-decoration: none; letter-spacing: 1px; margin: 0 14px; font-weight: 300;">Privacy Policy</a>
