@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 import path from 'path';
 
 
@@ -14,6 +15,12 @@ const __dirname = path.resolve();
 
 const PORT = process.env.PORT || 3000;
 
+// app.use(express.json()); // need to add this for parsing JSON bodies too
+// app.use(cookieParser()); // usually needed for auth
+
+app.use("/api/auth", authRoutes);
+app.use("/api/messages", messageRoutes);
+
 //make ready for production
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../frontend/dist')));
@@ -22,9 +29,6 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
     });
 }
-
-app.use("/api/auth", authRoutes);
-app.use("/api/messages", messageRoutes);
 app.listen(PORT, () => {
     console.log(`Server is running on port http://localhost:${PORT}`);
 });
