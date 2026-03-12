@@ -1,6 +1,6 @@
 import express from 'express';
 import {ENV} from './lib/env.js';
-// import cookieParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 import path from 'path';
 import { connectDB } from './lib/db.js';
 
@@ -15,7 +15,7 @@ const __dirname = path.resolve();
 const PORT = ENV.PORT;
 
 app.use(express.json()); // need to add this for parsing JSON bodies too
-// app.use(cookieParser()); // usually needed for auth
+app.use(cookieParser()); // usually needed for auth
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
