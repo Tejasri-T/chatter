@@ -3,7 +3,7 @@ import {ENV} from './lib/env.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import { connectDB } from './lib/db.js';
-
+import cors from 'cors';
 
 import authRoutes from './routes/auth.route.js';
 import messageRoutes from './routes/message.route.js';
@@ -15,6 +15,10 @@ const __dirname = path.resolve();
 const PORT = ENV.PORT;
 
 app.use(express.json()); // need to add this for parsing JSON bodies too
+app.use(cors({
+    origin: ENV.CLIENT_URL,
+    credentials: true, // allow cookies to be sent
+})); 
 app.use(cookieParser()); // usually needed for auth
 
 app.use("/api/auth", authRoutes);
