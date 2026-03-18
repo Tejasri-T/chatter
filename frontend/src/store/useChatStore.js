@@ -29,7 +29,7 @@ export const useChatStore = create((set,get) => ({
         set({ allContacts: res.data })
 
         } catch(error) {
-            toast.error(error.response?.data?.message)
+            toast.error(error?.response?.data?.message)
         } finally{
             set ({isUserLoading: false})
         }
@@ -44,7 +44,7 @@ export const useChatStore = create((set,get) => ({
         set({ chats: res.data })
 
         } catch(error) {
-            toast.error(error.response?.data?.message)
+            toast.error(error?.response?.data?.message)
         } finally{
             set ({isUserLoading: false})
         }

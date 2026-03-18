@@ -53,7 +53,7 @@ export const useAuthStore = create((set) => ({
             toast.success("You have been logged out.");
         } catch (error) {
             console.error("Error logging out", error);
-            toast.error("Error logging out. Please try again.");
+            toast.error(error.response?.data?.message || "Error logging out. Please try again.");
         }
     },
 
@@ -78,13 +78,11 @@ export const useAuthStore = create((set) => ({
             console.log("Profile updated successfully", res.data);
         }catch(error){
             console.error("Error updating profile", error);
-            toast.error("Error updating profile. Please try agin.");
+            toast.error(error.response?.data?.message || "Error updating profile. Please try again.");
         }finally {
             set({ isLoading: false });
         }
     }
-
-
 
 
 }));
