@@ -1,4 +1,3 @@
-import { useAuthStore } from "../store/useAuthStore"
 import { useChatStore } from "../store/useChatStore"
 import BorderAnimatedContainer from "../components/BoarderAnimatedContainer.jsx"
 import ProfileHeader from "../components/ProfileHeader.jsx"
@@ -8,12 +7,14 @@ import ContactList from "../components/ContactList"
 import ChatContainer from "../components/ChatContainer"
 import NoConversationPlaceholder from "../components/NoConversationPlaceholder"
 
+
+
+
 function ChatPage() {
-  const { logout } = useAuthStore()
   const {activeTab,selectedUser} = useChatStore()
 
   return (
-    <div className="relative w-full max-w-6xl h-[800px]">
+    <div className="relative w-full max-w-6xl h-[650px]">
       <BorderAnimatedContainer>
         {/* LEFT SIDE */}
         <div className="w-80 bg-slate-800/50 backdrop-blur-sm flex flex-col">
