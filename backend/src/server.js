@@ -14,7 +14,7 @@ const __dirname = path.resolve();
 
 const PORT = ENV.PORT;
 
-app.use(express.json()); // need to add this for parsing JSON bodies too
+app.use(express.json({limit: "1mb"})); // need to add this for parsing JSON bodies too
 app.use(cors({
     origin: ENV.CLIENT_URL,
     credentials: true, // allow cookies to be sent

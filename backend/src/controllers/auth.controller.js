@@ -113,12 +113,12 @@ export const updateProfile = async (req, res) => {
         
         const uploadImage = await cloudinary.uploader.upload(profilePicture)
 
+
         const updatedUser = await User.findByIdAndUpdate(
             userId, 
             {profilePicture: uploadImage.secure_url}, 
             {new:true}
         );
-
         res.status(200).json(updatedUser)
 
     } catch(error){
