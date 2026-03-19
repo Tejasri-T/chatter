@@ -2,6 +2,7 @@ import e from "express";
 import Message from "../models/Message.js";
 import User from "../models/Users.js";
 import cloudinary from "../lib/cloudinary.js";
+import { getReceiverSocketIds, io } from "../lib/socket.js";
 
 export const getAllContacts = async (req, res) => {
     try {
@@ -71,6 +72,14 @@ export const sendMessage = async (req, res) => {
         await newMessage.save();
 
         // todo: send message to receiver in real-time using socket.io
+        const receiverSocketIds = getReceiverSocketIds(receiverId);
+        if (receiverSocketIds) {
+            receiverSocketIds.forEach(socketId => {
+                io.to(socketId).emit("newMessage", newMessage);
+            });
+        }
+
+
 
         res.status(201).json(newMessage);
 
