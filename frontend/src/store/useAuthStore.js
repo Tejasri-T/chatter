@@ -1,15 +1,19 @@
 import {create } from "zustand";
 import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
+import { io } from "socket.io-client";
 
 
+const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:3000" : "/";
 
-export const useAuthStore = create((set) => ({
+export const useAuthStore = create((set,get) => ({
     authUser: null,
     isCheckingAuth: true,
     isSigningUp: false,
     isLoggingIn: false,
     isLoading: false,
+    socket: null,
+    onlineUsers: [],
 
     signUp: async (data) => {
         set({ isSigningUp: true });
@@ -21,6 +25,8 @@ export const useAuthStore = create((set) => ({
 
             //toast 
             toast.success("Signup successful! Welcome to Chatter.");
+
+            get().connectSocket();
 
         }catch (error) {
             
@@ -38,6 +44,8 @@ export const useAuthStore = create((set) => ({
             set({ authUser: res.data });
             console.log("Auth user set in store:", res.data);
             toast.success("Login successful! Welcome back.");
+
+            get().connectSocket();
         } catch (error) {
             // console.error("Error logging in", error);
             toast.error(error.response?.data?.message || "Error logging in.");
@@ -51,6 +59,8 @@ export const useAuthStore = create((set) => ({
             await axiosInstance.post("/auth/logout");
             set({ authUser: null });
             toast.success("You have been logged out.");
+
+            get().disconnectSocket();
         } catch (error) {
             console.error("Error logging out", error);
             toast.error(error.response?.data?.message || "Error logging out. Please try again.");
@@ -62,6 +72,9 @@ export const useAuthStore = create((set) => ({
         try{
             const res = await axiosInstance.get("/auth/check");
             set({authUser: res.data, isCheckingAuth: false });
+
+            get().connectSocket();
+
         }catch(error){
             console.error("Error checking auth status", error);
             set({ authUser: null, isCheckingAuth: false });
@@ -82,7 +95,33 @@ export const useAuthStore = create((set) => ({
         }finally {
             set({ isLoading: false });
         }
-    }
+    },
+
+    connectSocket: () => {
+        const { authUser } = get();
+        if (!authUser || get().socket?.connected) return;
+
+        const socket = io(BASE_URL, {
+            withCredentials: true
+        });
+
+        socket.connect();
+
+        set({ socket });
+
+
+        // Listen for online users list from the server
+
+        socket.on("getOnlineUsers", (onlineUserIds) => {
+            console.log("Online users:", onlineUserIds);
+            set({ onlineUsers: onlineUserIds });
+        });
+
+     },
+
+     disconnectSocket: () => {
+       if (get().socket?.connected)  get().socket?.disconnect();
+     }
 
 
 }));
