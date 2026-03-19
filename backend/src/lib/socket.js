@@ -16,6 +16,8 @@ const io = new Server(server,{
 
 //apply authentication middleware to socket.io
 
+
+
 io.use(socketAuthMiddleware);
 
 const userSocketMap = {};
