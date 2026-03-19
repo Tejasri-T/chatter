@@ -6,7 +6,7 @@
 
 Chatter is a modern, full-stack real-time chat application built with the MERN stack (MongoDB, Express, React, Node.js) and Socket.io. It features secure authentication, real-time messaging, profile customization, and a responsive UI.
 
-## ✨ Features
+## Features
 
 - **Real-time Messaging**: Instant message delivery and receipt status using Socket.io.
 - **Secure Authentication**: Robust user registration and login with JWT stored securely.
@@ -16,7 +16,7 @@ Chatter is a modern, full-stack real-time chat application built with the MERN s
 - **Beautiful UI**: A sleek, user-friendly, responsive interface built with Tailwind CSS and DaisyUI.
 - **Global State Management**: Fast and scalable state handling with Zustand.
 
-## 📸 App Screenshots
+## App Screenshots
 
 **Authentication:**<br>
 <img src="./assets/login.png" width="45%" border="1" /> &nbsp;
@@ -27,7 +27,7 @@ Chatter is a modern, full-stack real-time chat application built with the MERN s
 <img src="./assets/chatpage2.png" width="30%" border="1" /> &nbsp;
 <img src="./assets/chatpage3.png" width="30%" border="1" />
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 ### Frontend
 - **Framework**: React 19 + Vite
@@ -49,7 +49,7 @@ Chatter is a modern, full-stack real-time chat application built with the MERN s
 - **Email Services**: Resend
 
 
-## 🚀 Getting Started
+## Getting Started
 
 Follow these instructions to set up the project locally.
 
@@ -110,7 +110,7 @@ RESEND_API_KEY=your_resend_api_key # Optional
 
    The application will be running on `http://localhost:5173`.
 
-## 📁 Application Structure Highlights
+## Application Structure Highlights
 
 - **`frontend/src/`**
   - `components/`: Reusable UI elements (like `ProfileHeader`, buttons).
@@ -123,8 +123,8 @@ RESEND_API_KEY=your_resend_api_key # Optional
   - `routes/`: Express endpoint definitions.
   - `lib/`: Database and third-party configuration (Cloudinary, Arcjet).
 
-## 🤝 Contributing
+## Contributing
 Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/Tejasri-T/chatter/issues) if you want to contribute.
 
-## 📄 License
+## License
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
