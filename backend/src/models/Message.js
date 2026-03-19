@@ -24,6 +24,10 @@ const messageSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
+// expireAfterSeconds: 2592000 is exactly 30 days (60 * 60 * 24 * 30)
+messageSchema.index({ createdAt: 1 }, { expireAfterSeconds: 2592000 });
+
+
 const Message = mongoose.model('Message', messageSchema);
 
 export default Message;
