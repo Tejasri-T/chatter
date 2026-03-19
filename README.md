@@ -1,6 +1,5 @@
 # <img src="./frontend/public/chatter.svg" alt="Chatter Logo" width="42" align="center" /> Chatter
 
-![Chatter Banner](https://via.placeholder.com/800x200?text=Chatter+-+Real-time+Messaging)
 
 🟢 **[Live Demo: https://chatter-01ic.onrender.com](https://chatter-01ic.onrender.com)**
 
