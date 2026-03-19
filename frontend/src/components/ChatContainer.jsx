@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect,useRef } from "react"
 import { useChatStore } from "../store/useChatStore";
 import { useAuthStore } from "../store/useAuthStore";
 import ChatHeader from "./ChatHeader";
@@ -15,6 +15,11 @@ function ChatContainer() {
     getMessagesByUserId(selectedUser?._id)
   }, [selectedUser, getMessagesByUserId])
 
+  const  messageEndRef = useRef(null);
+
+  useEffect(() => {
+    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
 
   return (

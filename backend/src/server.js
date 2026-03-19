@@ -4,12 +4,13 @@ import cookieParser from 'cookie-parser';
 import path from 'path';
 import { connectDB } from './lib/db.js';
 import cors from 'cors';
+import {  app, server } from './lib/socket.js';
 
 import authRoutes from './routes/auth.route.js';
 import messageRoutes from './routes/message.route.js';
 
 
-const app = express();
+
 const __dirname = path.resolve();
 
 const PORT = ENV.PORT;
@@ -32,7 +33,7 @@ if (ENV.NODE_ENV === 'production') {
         res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
     });
 }
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server is running on port http://localhost:${PORT}`);
     connectDB();
 });
