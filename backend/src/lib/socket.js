@@ -16,11 +16,15 @@ const io = new Server(server,{
 
 //apply authentication middleware to socket.io
 
-
-
 io.use(socketAuthMiddleware);
 
+//get socket id for user id
+export function getReceiverSocketIds(userId)  {
+   return userSocketMap.get(userId) ;
+}
+
 const userSocketMap = new Map();
+// const userSocketMap = {}
 
 io.on("connection", (socket) => { 
     console.log('New client connected user:', socket.user?.fullName);
@@ -28,9 +32,12 @@ io.on("connection", (socket) => {
     const sockets = userSocketMap.get(userId) ?? new Set();
     sockets.add(socket.id);
     userSocketMap.set(userId, sockets);
+    // userSocketMap[userId] = socket.id;
+
 
     io.emit("getOnlineUsers", Array.from(userSocketMap.keys()));
-    
+    // io.emit("getOnlineUsers", Object.keys(userSocketMap));
+
 
     socket.on("disconnect", () => {
         console.log('disconnected user:', socket.user?.fullName);
@@ -41,7 +48,12 @@ io.on("connection", (socket) => {
                 userSocketMap.delete(userId);
             }
         }
+
+        // delete userSocketMap[userId];
+
         io.emit("getOnlineUsers", Array.from(userSocketMap.keys() ));
+        // io.emit("getOnlineUsers", Object.keys(userSocketMap));
+
     });
 });
 
