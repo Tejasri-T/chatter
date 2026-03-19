@@ -1,7 +1,8 @@
 # <img src="./frontend/public/chatter.svg" alt="Chatter Logo" width="42" align="center" /> Chatter
 
-
 🟢 **[Live Demo: https://chatter-01ic.onrender.com](https://chatter-01ic.onrender.com)**
+
+---
 
 Chatter is a modern, full-stack real-time chat application built with the MERN stack (MongoDB, Express, React, Node.js) and Socket.io. It features secure authentication, real-time messaging, profile customization, and a responsive UI.
 
@@ -14,6 +15,17 @@ Chatter is a modern, full-stack real-time chat application built with the MERN s
 - **Email Notifications**: Integrated with Resend for transactional emails.
 - **Beautiful UI**: A sleek, user-friendly, responsive interface built with Tailwind CSS and DaisyUI.
 - **Global State Management**: Fast and scalable state handling with Zustand.
+
+## 📸 App Screenshots
+
+**Authentication:**<br>
+<img src="./assets/login.png" width="45%" border="1" /> &nbsp;
+<img src="./assets/signup.png" width="45%" border="1" />
+
+**Real-Time Chat Interface:**<br>
+<img src="./assets/chatpage1.png" width="30%" border="1" /> &nbsp;
+<img src="./assets/chatpage2.png" width="30%" border="1" /> &nbsp;
+<img src="./assets/chatpage3.png" width="30%" border="1" />
 
 ## 🛠️ Technology Stack
 
@@ -35,6 +47,7 @@ Chatter is a modern, full-stack real-time chat application built with the MERN s
 - **Media Storage**: Cloudinary
 - **Security**: Arcjet (Rate Limiting) & CORS
 - **Email Services**: Resend
+
 
 ## 🚀 Getting Started
 
