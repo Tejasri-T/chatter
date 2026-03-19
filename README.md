@@ -2,6 +2,8 @@
 
 ![Chatter Banner](https://via.placeholder.com/800x200?text=Chatter+-+Real-time+Messaging)
 
+🟢 **[Live Demo: https://chatter-01ic.onrender.com](https://chatter-01ic.onrender.com)**
+
 Chatter is a modern, full-stack real-time chat application built with the MERN stack (MongoDB, Express, React, Node.js) and Socket.io. It features secure authentication, real-time messaging, profile customization, and a responsive UI.
 
 ## ✨ Features
