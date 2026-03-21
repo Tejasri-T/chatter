@@ -119,3 +119,88 @@ export const getChatPartners = async (req, res) => {
         res.status(500).json({ error: "An error occurred while fetching chat partners." });
     }
 };
+
+export const editMessage = async (req, res) => {
+    try {
+        const { id: messageId } = req.params;
+        const { text } = req.body;
+        const senderId = req.user._id;
+
+        const message = await Message.findById(messageId);
+
+        if (!message) {
+            return res.status(404).json({ message: "Message not found." });
+        }
+
+        if (message.senderId.toString() !== senderId.toString()) {
+            return res.status(403).json({ message: "You can only edit your own messages." });
+        }
+
+        message.text = text;
+        message.isEdited = true;
+        await message.save();
+
+        const receiverSocketIds = getReceiverSocketIds(message.receiverId);
+        if (receiverSocketIds) {
+            receiverSocketIds.forEach(socketId => {
+                io.to(socketId).emit("messageEdited", message);
+            });
+        }
+        
+        // Emit to sender's other devices
+        const senderSocketIds = getReceiverSocketIds(message.senderId);
+        if (senderSocketIds) {
+             senderSocketIds.forEach(socketId => {
+                 io.to(socketId).emit("messageEdited", message);
+             });
+        }
+
+        res.status(200).json(message);
+
+    } catch (error) {
+        console.error("Error editing message:", error);
+        res.status(500).json({ error: "An error occurred while editing the message." });
+    }
+};
+
+export const deleteMessage = async (req, res) => {
+    try {
+        const { id: messageId } = req.params;
+        const senderId = req.user._id;
+
+        const message = await Message.findById(messageId);
+
+        if (!message) {
+            return res.status(404).json({ message: "Message not found." });
+        }
+
+        if (message.senderId.toString() !== senderId.toString()) {
+            return res.status(403).json({ message: "You can only delete your own messages." });
+        }
+
+        await Message.findByIdAndDelete(messageId);
+
+        const eventData = { messageId, receiverId: message.receiverId, senderId: message.senderId };
+
+        const receiverSocketIds = getReceiverSocketIds(message.receiverId);
+        if (receiverSocketIds) {
+            receiverSocketIds.forEach(socketId => {
+                io.to(socketId).emit("messageDeleted", eventData);
+            });
+        }
+        
+        // Emit to sender's other devices
+        const senderSocketIds = getReceiverSocketIds(message.senderId);
+        if (senderSocketIds) {
+             senderSocketIds.forEach(socketId => {
+                 io.to(socketId).emit("messageDeleted", eventData);
+             });
+        }
+
+        res.status(200).json({ message: "Message deleted successfully.", messageId });
+
+    } catch (error) {
+        console.error("Error deleting message:", error);
+        res.status(500).json({ error: "An error occurred while deleting the message." });
+    }
+};

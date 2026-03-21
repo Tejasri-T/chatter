@@ -100,6 +100,29 @@ export const useChatStore = create((set, get) => ({
 
     },
 
+    editMessage: async (messageId, newText) => {
+        const { messages } = get();
+        try {
+            const res = await axiosInstance.put(`/messages/edit/${messageId}`, { text: newText });
+            const updatedMessage = res.data;
+            set({ messages: messages.map(msg => msg._id === messageId ? updatedMessage : msg) });
+            toast.success("Message edited successfully");
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Failed to edit message");
+        }
+    },
+
+    deleteMessage: async (messageId) => {
+        const { messages } = get();
+        try {
+            await axiosInstance.delete(`/messages/delete/${messageId}`);
+            set({ messages: messages.filter(msg => msg._id !== messageId) });
+            toast.success("Message deleted successfully");
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Failed to delete message");
+        }
+    },
+
     subscribeToMessages: () => {
         const { selectedUser, isSoundEnabled } = get();
         if (!selectedUser) return;
@@ -125,11 +148,25 @@ export const useChatStore = create((set, get) => ({
 
             }
         });
+
+        socket.on("messageEdited", (updatedMessage) => {
+            const { messages, selectedUser } = get();
+            if (!selectedUser || (updatedMessage.senderId !== selectedUser._id && updatedMessage.receiverId !== selectedUser._id)) return;
+            set({ messages: messages.map(msg => msg._id === updatedMessage._id ? updatedMessage : msg) });
+        });
+
+        socket.on("messageDeleted", ({ messageId, receiverId, senderId }) => {
+            const { messages, selectedUser } = get();
+            if (!selectedUser || (senderId !== selectedUser._id && receiverId !== selectedUser._id)) return;
+            set({ messages: messages.filter(msg => msg._id !== messageId) });
+        });
     },
 
     unSubscribeFromMessages: () => {
         const socket = useAuthStore.getState().socket;
         socket.off("newMessage");
+        socket.off("messageEdited");
+        socket.off("messageDeleted");
     }
 
 }))
